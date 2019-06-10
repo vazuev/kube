@@ -7,6 +7,7 @@ Vagrant.configure("2") do |config|
     d.vm.box = "ubuntu/bionic64"
     d.vm.hostname = "control"
     d.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+    d.vm.synced_folder "control", "/home/vagrant/src", type: "virtualbox"
     d.vm.network "private_network", ip: "192.168.111.10"
     d.vm.provision :shell, privileged:false, path: "bootstrap_ansible.sh"
     d.vm.provider "virtualbox" do |v|

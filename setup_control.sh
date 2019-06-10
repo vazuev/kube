@@ -10,10 +10,6 @@ chmod 700 ~/.ssh && chmod 600 ~/.ssh/*
 #sudo restorecon -R -v ~/.ssh
 echo "SSH key pair generation finished!"
 
-# Configure apt-cacher-ng as proxy (LUXOFT ONLY)
-#echo 'Acquire::http { Proxy "http://ro-apt-proxy.luxoft.com:3142"; };' | sudo tee /etc/apt/apt.conf.d/7proxy
-#echo 'Acquire::http::Proxy { ppa.launchpad.net DIRECT; };' | sudo tee /etc/apt/apt.conf.d/7proxy
-
 # Install some tools
 sudo apt-get update
 sudo apt-get install -y unzip vim tmux software-properties-common curl wget rsync

@@ -13,7 +13,7 @@ echo "SSH key pair generation finished!"
 
 # Install some tools
 sudo apt-get update
-sudo apt-get install -y unzip vim tmux software-properties-common curl wget rsync git python-pip
+sudo apt-get install -y unzip vim tmux software-properties-common curl wget rsync git python-pip python3-pip
 # sudo snap install kubeadm --classic
 #python-minimal
 
@@ -31,9 +31,11 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 echo "kubectl installation finished!"
 
 
-cd /home/vagrant 
+cd /home/vagrant/src
 git clone https://github.com/kubernetes-sigs/kubespray.git
 cd kubespray
+pip3 install ruamel_yaml==0.15.97  --user
+pip install -r requirements.txt --user
 
 # pip3 install --upgrade cryptography --user
 # pip3 install ruamel_yaml==0.15.97  --user
