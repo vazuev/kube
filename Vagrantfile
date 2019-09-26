@@ -10,8 +10,9 @@ Vagrant.configure("2") do |config|
     d.vm.synced_folder "control", "/home/vagrant/src", type: "virtualbox"
     d.vm.network "private_network", ip: "192.168.111.10"
     d.vm.provision :shell, privileged:false, path: "bootstrap_ansible.sh"
+    d.vm.provision :shell, inline: 'cat /vagrant/control.pub >> /home/vagrant/.ssh/authorized_keys'
     d.vm.provider "virtualbox" do |v|
-      v.memory = 512
+      v.memory = 2000
     end
   end
 
