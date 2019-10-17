@@ -2,6 +2,8 @@ Vagrant.configure("2") do |config|
 
   # config.vm.synced_folder "ansible", "/ansible"
   # config.ssh.forward_agent = true
+  config.vm.boot_timeout = 600
+  config.disksize.size = '60GB'
 
   config.vm.define "control" do |d|
     d.vm.box = "ubuntu/bionic64"
@@ -12,7 +14,7 @@ Vagrant.configure("2") do |config|
     d.vm.provision :shell, privileged:false, path: "bootstrap_ansible.sh"
     d.vm.provision :shell, inline: 'cat /vagrant/control.pub >> /home/vagrant/.ssh/authorized_keys'
     d.vm.provider "virtualbox" do |v|
-      v.memory = 2000
+      v.memory = 4096
     end
   end
 

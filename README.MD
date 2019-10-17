@@ -90,3 +90,70 @@ ansible-playbook -i inventory/mycluster/hosts.yml remove-node.yml -b -v \
 
 В Kubespray предусмотрены настройки для инсталляции дополнительных плагинов
 inventory/mycluster/group_vars/k8s-cluster/addons.yml
+
+-----------------
+
+
+Если после установки кластера нужно внести изменения в настройки плагинов, 
+то нужно после внесения изменений в addons.yml выполнить
+ansible-playbook upgrade-cluster.yml -b -i inventory/mycluster/hosts.yml
+
+
+-----------------
+
+Инициализация Helm
+
+kubectl create serviceaccount --namespace kube-system tiller
+
+kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+
+kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
+
+helm init
+
+-----------------
+
+
+В новой версии спрея это уже есть
+Инициализация storageclass для hostPath
+
+https://github.com/rancher/local-path-provisioner
+
+kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
+
+
+------------------
+
+Инсталляция redis 
+
+В параметрах инталляции чарта указываем --set master.persistence.storageClass=local-path
+
+helm install --name redis-cluster \
+    --set cluster.slaveCount=3   \
+    --set password=password   \
+    --set securityContext.enabled=true   \
+    --set securityContext.fsGroup=2000   \
+    --set securityContext.runAsUser=1000   \
+    --set master.persistence.enabled=true   \
+    --set master.persistence.storageClass=local-path   \
+    --set slave.persistence.enabled=true   \
+    --set slave.persistence.storageClass=local-path \
+    stable/redis
+    
+Или проще
+    
+helm install --name redis-cluster \
+    --set password=password   \
+    --set master.persistence.enabled=true   \
+    --set master.persistence.storageClass=local-path   \
+    --set slave.persistence.enabled=true   \
+    --set slave.persistence.storageClass=local-path \
+    stable/redis
+
+--------------
+
+Инсталляция mysql
+
+helm install --name mysql \
+    --set persistence.storageClass=local-path \
+    stable/mysql

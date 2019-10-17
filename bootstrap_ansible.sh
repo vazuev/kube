@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 
 # Generate ssh key pair

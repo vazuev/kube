@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-ns
+  namespace: test
+  labels:
+    namespase: test
+
+data:
+  backend.properties: |
+    redis_address=redis
+    redis_port=9876
+  frontend.properties: |
+    backend_address=backend
+    backend_port=8080
