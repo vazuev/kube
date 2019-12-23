@@ -15,6 +15,10 @@
 
 Подготовка к инсталляции
 
+Поднимаем виртуалки из vagrantfile: vagrant up control node1
+
+Заходим по ssh на машину control: vagrant ssh control
+
 Копируем пример инвентаря
 
 cp -rfp inventory/sample inventory/mycluster
