@@ -23,7 +23,7 @@
 
 cp -rfp inventory/sample inventory/mycluster
 
-Что бы построить файл инвентаря hosts.yml нужно будет установить python3 и установить зависимости
+Чтобы построить файл инвентаря hosts.yml нужно будет установить python3 и установить зависимости
 pip3 install ruamel_yaml==0.15.97  --user
 
 Конструируем hosts.yml
