@@ -1,6 +1,7 @@
 ### Устанавливаем jenkins
 
-Передварительно убеждаемся что создан storageClass local-path (https://github.com/rancher/local-path-provisioner)
+~~Передварительно убеждаемся что создан storageClass local-path (https://github.com/rancher/local-path-provisioner)~~
+При установке k8s нужно в аддонах указать local_path_provisioner_enabled: true
 
 #### С файлом values.yaml
 
