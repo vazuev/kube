@@ -28,6 +28,7 @@ pip3 install ruamel_yaml==0.15.97  --user
 
 Конструируем hosts.yml
 declare -a IPS=( 192.168.111.11 192.168.111.12 192.168.111.13)
+
 CONFIG_FILE=inventory/mycluster/hosts.yml python3 contrib/inventory_builder/inventory.py ${IPS[@]}
 Желательно после создания проверить hosts.yml и внести правки по вкусу
 
@@ -39,10 +40,15 @@ ansible-playbook -i inventory/mycluster/inventory.ini --become --become-user=roo
 
 
 -----
+
 После выполнения Ansible сделать на мастерноде
 
+vagrant ssh node1
+
 mkdir -p $HOME/.kube
+
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 далее управление kubernetes доступно с использованием kubectl
